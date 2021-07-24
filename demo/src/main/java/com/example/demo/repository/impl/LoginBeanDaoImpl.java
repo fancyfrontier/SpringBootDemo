@@ -25,13 +25,10 @@ public class LoginBeanDaoImpl implements ILoginBeanDao{
 			loginBean1 = entityManager.createQuery(hql, LoginBean.class)
 									 .setParameter("email", loginBean.getEmail())
 									 .getResultList();
-			
 			if(loginBean1.size() == 0) {
 				entityManager.persist(loginBean);
 				return loginBean;
 			}
-
-			
 		}catch(NoResultException e) {
 			e.printStackTrace();
 		}catch(NonUniqueResultException e) {
