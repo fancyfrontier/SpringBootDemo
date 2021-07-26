@@ -31,20 +31,6 @@ public class NewLoginController {
 		return "NewLogin";
 	}
 	
-	@GetMapping("/SystemShowMember")
-	 public String showAllMemberData(Model m) {
-		List<LoginBean> memberData = loginBeanService.findAll();
-		m.addAttribute("memberData", memberData);
-		return "SystemShowMember";
-	 }
-	
-	@GetMapping("/ToDeleteMember")
-	 public String deleteMember(@RequestParam(name = "memberid") Integer memberid, Model m) {
-		loginBeanService.delete(memberid);
-		List<LoginBean> memberData = loginBeanService.findAll();
-		m.addAttribute("memberData", memberData);
-		return "SystemShowMember";
-	 }
 
 	@PostMapping("/newCheckMemberData")
 	public String checkMemberData(@RequestParam(name = "email") String email,
@@ -113,6 +99,45 @@ public class NewLoginController {
 
 	}
 	
+	@GetMapping("/SystemUpdateMember")
+	public String toSystemUpdateMember(@RequestParam(name = "memberid") Integer memberid, Model m) {
+		
+		LoginBean result = loginBeanService.selectById(memberid);
+		m.addAttribute("member", result);
+		
+		return "SystemUpdateMember";
+	}
+	
+	@PostMapping("/SystemToUpdateMember")
+	public String systemUpdate(@RequestParam(name = "memberid") Integer memberid, HttpServletRequest request, Model m) {
+		System.out.println("memberid = " + memberid);
+		LoginBean loginBean = loginBeanService.selectById(memberid);
+		loginBean.setFirstname(request.getParameter("firstname"));
+		loginBean.setLastname(request.getParameter("lastname"));
+		loginBean.setGender(request.getParameter("gender"));
+		loginBean.setBirthday(request.getParameter("birthday"));
+		loginBean.setMobile(request.getParameter("mobile"));
+		loginBeanService.update(loginBean);
+		
+		List<LoginBean> memberData = loginBeanService.findAll();
+		m.addAttribute("memberData", memberData);
+		return "SystemShowMember";
+	}
+
+	@GetMapping("/SystemShowMember")
+	 public String showAllMemberData(Model m) {
+		List<LoginBean> memberData = loginBeanService.findAll();
+		m.addAttribute("memberData", memberData);
+		return "SystemShowMember";
+	 }
+	
+	@GetMapping("/ToDeleteMember")
+	 public String deleteMember(@RequestParam(name = "memberid") Integer memberid, Model m) {
+		loginBeanService.delete(memberid);
+		List<LoginBean> memberData = loginBeanService.findAll();
+		m.addAttribute("memberData", memberData);
+		return "SystemShowMember";
+	 }
 	
 	@GetMapping("/newLogout")
 	public String logout(HttpServletRequest request) {

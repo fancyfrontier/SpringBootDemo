@@ -67,7 +67,7 @@ h3 {
             </thead>
             <tbody>
 				<c:forEach var="member" items="${memberData}" varStatus="i" >
-				<form id="myForm${i.count}">
+				<form id="myForm${i.count}" method="get">
                 <tr>
                     <th style="width: 80px;" scope="row"><input size=9 class="MemberNumInput" readonly type="text" name="memberid" value="${member.memberid}"></th>
                     <td style="width: 200px;"><input size=35 class="MemberNumInput" readonly type="text" name="email" value="${member.email}"></td>
@@ -78,7 +78,7 @@ h3 {
                     <td style="width: 130px;"><input size=10 class="MemberNumInput" readonly type="text" name="birthday" value="${member.birthday}"></td>
                     <td style="width: 150px;"><input size=13 class="MemberNumInput" readonly type="text" name="mobile" value="${member.mobile}"></td>
                     <td style="width: 50px;"><button type="submit" class="btn btn-success" id="change"
-                            style="width:100px;height:40px;" onclick="toChange()">修改</button></td>
+                            style="width:100px;height:40px;" onclick="toChange(${i.count})">修改</button></td>
                     <td style="width: 50px;"><button type="submit" class="btn btn-success" id="delete"
                             style="width:100px;height:40px;" onclick="CheckForm(${i.count})">刪除</button></td>
                 </form>
@@ -94,20 +94,20 @@ h3 {
     	function CheckForm(i) {
         	if (confirm("請確認是否進行變更？")) {
         		toDelete(i);
-        		
         	} else {
         	}
     	}
         
-        function toChange(count) {
-        	var x = document.getElementById("myForm"+i)
-            x.action = "<c:url value='/ToDeleteMember'/>";
-            x.submit();
+        function toChange(i) {
+        	var chnData = document.getElementById("myForm"+i)
+            chnData.action = "<c:url value='/SystemUpdateMember'/>";
+            chnData.submit();
         }
+        
         function toDelete(i) {
-        	var x = document.getElementById("myForm"+i)
-            x.action = "<c:url value='/ToDeleteMember'/>";
-            x.submit();
+        	var deleteData = document.getElementById("myForm"+i)
+            deleteData.action = "<c:url value='/ToDeleteMember'/>";
+            deleteData.submit();
         }
 
 
