@@ -93,4 +93,30 @@ public class LoginBeanDaoImpl implements ILoginBeanDao{
 		}
 		return false;
 	}
+	
+	@Override
+	 public List<LoginBean> findAll() {
+	  String hql = "FROM   LoginBean";
+	  return entityManager.createQuery(hql, LoginBean.class)
+	                .getResultList();
+	 }
+	
+	@Override
+	 public void delete(Integer memberid) {
+		LoginBean loginBean = entityManager.find(LoginBean.class, memberid);
+		entityManager.remove(loginBean);
+	 }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

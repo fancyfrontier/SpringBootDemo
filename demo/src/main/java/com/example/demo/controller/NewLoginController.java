@@ -31,7 +31,21 @@ public class NewLoginController {
 		return "NewLogin";
 	}
 	
+	@GetMapping("/SystemShowMember")
+	 public String showAllMemberData(Model m) {
+		List<LoginBean> memberData = loginBeanService.findAll();
+		m.addAttribute("memberData", memberData);
+		return "SystemShowMember";
+	 }
 	
+	@GetMapping("/ToDeleteMember")
+	 public String deleteMember(@RequestParam(name = "memberid") Integer memberid, Model m) {
+		loginBeanService.delete(memberid);
+		List<LoginBean> memberData = loginBeanService.findAll();
+		m.addAttribute("memberData", memberData);
+		return "SystemShowMember";
+	 }
+
 	@PostMapping("/newCheckMemberData")
 	public String checkMemberData(@RequestParam(name = "email") String email,
 			@RequestParam(name = "password") String password, HttpServletRequest request, Model m) {

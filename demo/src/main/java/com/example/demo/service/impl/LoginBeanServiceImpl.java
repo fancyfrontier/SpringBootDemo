@@ -47,5 +47,14 @@ public class LoginBeanServiceImpl implements LoginBeanService {
 		return iLoginBeanDao.checkLogin(users);
 	}
 	
+	@Override
+	public List<LoginBean> findAll() {
+		
+		return iLoginBeanDao.findAll();
+	}
+	@Override
+	public void delete(Integer memberid) {
+		iLoginBeanDao.delete(memberid);
+	}
 
 }
