@@ -32,7 +32,7 @@ public class NewLoginController {
 	}
 	
 
-	@PostMapping("/newCheckMemberData")
+	@PostMapping("/UserCheckMemberData")
 	public String checkMemberData(@RequestParam(name = "email") String email,
 			@RequestParam(name = "password") String password, HttpServletRequest request, Model m) {
 
@@ -45,7 +45,7 @@ public class NewLoginController {
 			LoginBean result = loginBeanService.selectByEmail(email);
 			request.getSession().setAttribute("login", result.getMemberid());
 			m.addAttribute("member", result);
-			return "NewShowLogin";
+			return "UserShowLogin";
 		}
 
 		errors.put("message", "please input correct username and password");
@@ -53,17 +53,17 @@ public class NewLoginController {
 	}
 	
 	
-	@PostMapping("/newGetMemberLogin")
+	@PostMapping("/UserGetMemberData")
 	public String getMemberLogin(@RequestParam(name = "memberid") Integer memberid, Model m) {
 		
 		LoginBean result = loginBeanService.selectById(memberid);
 		m.addAttribute("member", result);
 		
-		return "NewMemberShow";
+		return "UserUpdatePage";
 	}
 	
 	
-	@PostMapping("/newUpdateData")
+	@PostMapping("/UserUpdateMemberData")
 	public String updateData(@RequestParam(name = "memberid") Integer memberid, HttpServletRequest request, Model m) {
 		System.out.println("memberid = " + memberid);
 		LoginBean loginBean = loginBeanService.selectById(memberid);
@@ -76,11 +76,11 @@ public class NewLoginController {
 		LoginBean member = loginBeanService.selectById(memberid); 		
 		m.addAttribute("member", member);
 		
-		return "NewShowLogin";
+		return "UserShowLogin";
 	}
 	
 	
-	@PostMapping("/newRegistermember")
+	@PostMapping("/Registermember")
 	public String registermember(@RequestParam(name = "email") String email, 
 								 @RequestParam(name = "password") String password, Model m) {
 		LoginBean insertbean = new LoginBean();
@@ -95,7 +95,7 @@ public class NewLoginController {
 		}
 		m.addAttribute("member", result);
 		
-		return "NewShowLogin";
+		return "UserShowLogin";
 
 	}
 	

@@ -116,7 +116,7 @@ System.out.println(basePath);%>
             <!--heading---->
             <strong>會員登入</strong>
             <!--inputs-->
-            <form method="post" action="<c:url value='/newCheckMemberData'/>">
+            <form method="post" action="<c:url value='/UserCheckMemberData'/>">
                 <input type="email" placeholder="Example@gmail.com" name="email" required>
                 <input type="password" placeholder="Password" name="password" required>
                 <!--submit-btn-->
@@ -141,7 +141,7 @@ System.out.println(basePath);%>
             <!--heading---->
             <strong>建立帳戶</strong>
             <!--inputs-->
-            <form method="post" action="<c:url value='/newRegistermember'/>">
+            <form method="post" action="<c:url value='/Registermember'/>">
                 <input type="email" placeholder="Example@gmail.com" name="email" required>
                 <input type="password" placeholder="Password" name="password" required>
                 <input type="password" placeholder="Confirm Password" name="cpassword" required>
